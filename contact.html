@@ -165,8 +165,9 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark" role="navigation" aria-label="Main Navigation">
-        <a class="navbar-brand" href="#">GLV Architects</a>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Main Navigation">
+        <a class="navbar-brand" href="#" aria-label="GLV Architects Home">GLV Architects</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -176,21 +177,24 @@
                 <li class="nav-item"><a class="nav-link" href="index.html" aria-label="home.html">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="about.html" aria-label="About Us">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="portfolio.html" aria-label="Our Portfolio">Portfolio</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact.html" aria-label="Contact Us">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html" aria-label="Contact Us">Contact Us</a></li>
                 <li class="nav-item"><a class="nav-link" href="appointment.html" aria-label="Book an Appointment">Book an Appointment</a></li>
                 <li class="nav-item"><a class="nav-link" href="expertise.html" aria-label="Our Expertise">Expertise</a></li>
             </ul>
         </div>
-        <div class="toggle">
-            <button aria-label="Toggle Dark Mode" onclick="toggleDarkMode()">Dark Mode</button>
-            <button aria-label="Toggle Colorblind Mode" onclick="toggleColorblindMode()">Colorblind Mode</button>
+        <div class="toggle" aria-label="Toggle Theme Modes">
+            <button onclick="toggleDarkMode()" aria-label="Toggle Dark Mode">Dark Mode</button>
+            <button onclick="toggleColorblindMode()" aria-label="Toggle Colorblind Mode">Colorblind Mode</button>
         </div>
     </nav>
 
+    <!-- Contact Form Section -->
     <section class="section">
         <div class="container">
-            <h2 id="contact-title">Contact Us</h2>
+            
+
             <form class="contact-form" aria-labelledby="contact-title" aria-label="Contact Form">
+                <h1 style="text-align: center;"><label for="name">Contact Us</label></h1>
                 <label for="name">Enter Your Name</label>
                 <input type="text" id="name" placeholder="Your Name" required aria-label="Your Name" aria-required="true">
                 
@@ -204,8 +208,8 @@
             </form>
         </div>
     </section>
-    
 
+    <!-- Footer -->
     <footer class="text-center">
         <div class="container">
             <p>&copy; 2024 GLV Architects. All Rights Reserved.</p>
@@ -217,6 +221,9 @@
         </div>
     </footer>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         function toggleDarkMode() {
             document.body.classList.toggle("dark-mode");

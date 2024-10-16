@@ -144,6 +144,14 @@
             background-color: #1C1C2E;
         }
 
+        .dark-mode .card-body {
+        color: #EDF2F4; /* Light color for text in dark mode */
+        }
+
+        .dark-mode .card-title {
+         color: #1C1C2E; /* Different color for card titles in dark mode */
+        }
+
         /* Colorblind Mode */
         .colorblind-mode {
             background-color: #F5F5F5;
@@ -249,11 +257,13 @@
                 <li class="nav-item"><a class="nav-link" href="expertise.html" aria-label="Our Expertise">Expertise</a></li>
             </ul>
         </div>
-        <div class="toggle" aria-label="Toggle Theme Modes">
+        <div class="toggle">
             <button onclick="toggleDarkMode()" aria-label="Toggle Dark Mode">Dark Mode</button>
             <button onclick="toggleColorblindMode()" aria-label="Toggle Colorblind Mode">Colorblind Mode</button>
-            <a href="profile.html" class="profile-btn" aria-label="User Profile">Profile</a> <!-- Moved Profile button here -->
-        </div> 
+            <a href="profile.html" class="profile-btn" aria-label="User Profile">Profile</a> <!-- Profile Button -->
+        </div>
+    </div>
+</nav>
         
     </nav>
 
@@ -282,7 +292,7 @@
                             class="card-img-top img-fluid" alt="Modern Architecture Project 1">
                         <div class="card-body">
                             <h5 class="card-title" id="project1-heading">Project 1</h5>
-                            <p class="card-text">A beautiful modern house with sustainable features.</p>
+                            <p class="card-title">A beautiful modern house with sustainable features.</p>
                         </div>
                     </div>
                 </div>
@@ -292,7 +302,7 @@
                             class="card-img-top img-fluid" alt="Modern Architecture Project 2">
                         <div class="card-body">
                             <h5 class="card-title" id="project2-heading">Project 2</h5>
-                            <p class="card-text">An innovative commercial space with dynamic design.</p>
+                            <p class="card-title">An innovative commercial space with dynamic design.</p>
                         </div>
                     </div>
                 </div>
@@ -302,7 +312,7 @@
                             class="card-img-top img-fluid" alt="Modern Architecture Project 3">
                         <div class="card-body">
                             <h5 class="card-title" id="project3-heading">Project 3</h5>
-                            <p class="card-text">A community center designed for flexibility and inclusivity.</p>
+                            <p class="card-title">A community center designed for flexibility and inclusivity.</p>
                         </div>
                     </div>
                 </div>

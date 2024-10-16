@@ -62,25 +62,24 @@
             margin-bottom: 20px;
         }
 
-        .profile-info .edit-profile,
-        .profile-info .logout {
+        .profile-info .action-buttons {
             display: flex;
-            justify-content: flex-end;
-            gap: 10px;
+            justify-content: center;
+            gap: 15px; /* Add space between buttons */
+            margin-top: 20px;
         }
 
-        .edit-profile button,
-        .logout button {
+        .action-buttons button {
             background-color: #8D99AE;
             color: #EDF2F4;
             border: none;
             padding: 10px 15px;
             border-radius: 8px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
 
-        .edit-profile button:hover,
-        .logout button:hover {
+        .action-buttons button:hover {
             background-color: #6C757D;
         }
 
@@ -97,21 +96,53 @@
             color: #EDF2F4;
         }
 
+        .dark-mode .navbar {
+            background-color: #1C1C2E;
+        }
+
+        .dark-mode .navbar-brand,
+        .dark-mode .nav-link {
+            color: #FFD166 !important;
+        }
+
+        .dark-mode h2,
+        .dark-mode h3 {
+            color: #FFD166;
+        }
+
+        .dark-mode .profile-info {
+            background-color: #3A3D5C;
+            color: #EDF2F4;
+        }
+
         /* Colorblind Mode */
         .colorblind-mode {
             background-color: #E5E5E5;
             color: #202020;
         }
 
+        .colorblind-mode .navbar {
+            background-color: #C5C5C5;
+        }
+
+        .colorblind-mode .navbar-brand,
+        .colorblind-mode .nav-link {
+            color: #0000FF !important;
+        }
+
+        .colorblind-mode .profile-info {
+            background-color: #DDE1E4;
+        }
+
         /* Toggle Button Styles */
         .toggle {
             display: flex;
-            gap: 15px; /* Add space between buttons */
-            margin-left: 15px; /* Align the buttons properly in the navbar */
+            gap: 15px;
+            margin-left: 15px;
         }
 
         .toggle button {
-            padding: 5px 10px; /* Adjust button padding */
+            padding: 5px 10px;
             background-color: #8D99AE;
             color: #EDF2F4;
             border: none;
@@ -140,7 +171,6 @@
                 <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
                 <li class="nav-item"><a class="nav-link" href="appointment.html">Book an Appointment</a></li>
             </ul>
-            <!-- Move Toggle buttons here -->
             <div class="toggle">
                 <button onclick="toggleDarkMode()">Dark Mode</button>
                 <button onclick="toggleColorblindMode()">Colorblind Mode</button>
@@ -151,7 +181,7 @@
     <section class="profile-section">
         <div class="profile-info animate__animated animate__fadeInUp">
             <h2>Profile Information</h2>
-    
+
             <div class="profile-details" aria-labelledby="personal-details">
                 <h3 id="personal-details">Personal Details</h3>
                 <label for="name">Name:</label>
@@ -163,17 +193,16 @@
                 <label for="address">Address:</label>
                 <p id="address" aria-describedby="address-description"></p>
             </div>
-    
-            <div class="edit-profile">
-                <button onclick="editProfile()" aria-label="Edit your profile">Edit Profile</button>
+
+            <!-- Conditional rendering for the action button -->
+            <div class="action-buttons">
+                <button id="editProfileBtn" onclick="editProfile()" aria-label="Edit your profile" style="display: none;">Edit Profile</button>
+                <button id="logoutBtn" onclick="logout()" aria-label="Logout from your account" style="display: none;">Logout</button>
+                <button id="signupBtn" style="display: none;" onclick="redirectToSignup()" aria-label="Sign up for an account">Login</button>
             </div>
-            <div class="logout">
-                <button onclick="logout()" aria-label="Logout from your account">Logout</button>
-            </div>
-            <!-- Add text-to-speech button with aria label -->
-            
+        </div>
     </section>
-    
+
     <footer class="text-center">
         <div class="container">
             <p>&copy; 2024 GLV Architects. All Rights Reserved.</p>
@@ -185,6 +214,9 @@
         </div>
     </footer>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         // Load Profile Information from Local Storage
         function loadProfile() {
@@ -195,6 +227,13 @@
                 document.getElementById('email').textContent = userData.email || 'Not Set';
                 document.getElementById('gender').textContent = userData.gender || 'Not Specified';
                 document.getElementById('address').textContent = userData.address || 'Not Specified';
+
+                // Show the edit profile and logout buttons
+                document.getElementById('editProfileBtn').style.display = 'inline-block';
+                document.getElementById('logoutBtn').style.display = 'inline-block';
+            } else {
+                // Show the sign-up button if not logged in
+                document.getElementById('signupBtn').style.display = 'inline-block';
             }
         }
 
@@ -228,6 +267,11 @@
             window.location.href = 'login.html'; // Redirect to Sign In page
         }
 
+        // Redirect to Sign Up page
+        function redirectToSignup() {
+            window.location.href = 'signup.html'; // Change this to your actual sign-up page URL
+        }
+
         // Toggle Dark Mode
         function toggleDarkMode() {
             document.body.classList.toggle("dark-mode");
@@ -237,9 +281,6 @@
         function toggleColorblindMode() {
             document.body.classList.toggle("colorblind-mode");
         }
-
-        
-        
 
         // Load profile information when the page loads
         window.onload = loadProfile;
