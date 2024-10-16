@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Signup</title>
+    <style>
+        body {
+            background-color: #2B2D42;
+            color: #EDF2F4;
+            font-family: 'Helvetica', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #3A3D5C;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+            color: #FFD166;
+            font-size: 24px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            text-align: left;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: #8D99AE;
+            color: #EDF2F4;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #FFD166;
+            color: #2B2D42;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #E9C46A;
+        }
+
+        .form-switch {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .form-switch a {
+            color: #FFD166;
+            cursor: pointer;
+        }
+
+        /* Dark Mode & Colorblind Mode Styles */
+        .dark-mode {
+            background-color: #1C1C2E;
+            color: #EDF2F4;
+        }
+
+        .colorblind-mode {
+            background-color: #E5E5E5;
+            color: #202020;
+        }
+
+        .colorblind-mode input {
+            background-color: #BDBDBD;
+        }
+
+        .colorblind-mode button {
+            background-color: #000;
+            color: #FFF;
+        }
+
+        .colorblind-mode a {
+            color: #0000FF;
+        }
+
+        /* Toggle Button Styles */
+        .toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .toggle button {
+            background-color: #8D99AE;
+            color: #EDF2F4;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .toggle button:hover {
+            background-color: #6C757D;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="toggle" aria-label="Toggle accessibility modes">
+        <button onclick="toggleDarkMode()" aria-label="Toggle dark mode">Dark Mode</button>
+        <button onclick="toggleColorblindMode()" aria-label="Toggle colorblind mode">Colorblind Mode</button>
+    </div>
+
+    <div class="container" id="loginForm" role="form" aria-labelledby="loginHeading">
+        <h2 id="loginHeading">Login</h2>
+        <form aria-labelledby="loginForm">
+            <label for="loginUsername">Username:</label>
+            <input type="text" id="loginUsername" required aria-required="true" aria-describedby="loginUsernameDesc">
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" required aria-required="true" aria-describedby="loginPasswordDesc">
+            <button type="button" onclick="authenticate()" aria-label="Login">Login</button>
+            <p id="loginError" style="color: red; display: none;" aria-live="assertive">Invalid credentials, please try again.</p>
+        </form>
+        <div class="form-switch">
+            <p>Don't have an account? <a id="signupLink" aria-label="Switch to signup form">Sign Up</a></p>
+        </div>
+    </div>
+
+    <div class="container" id="signupForm" style="display: none;" role="form" aria-labelledby="signupHeading">
+        <h2 id="signupHeading">Signup</h2>
+        <form id="registrationForm" aria-labelledby="signupForm">
+            <!-- First Name -->
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required aria-required="true">
+
+            <!-- Surname -->
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname" name="surname" required aria-required="true">
+
+            <!-- Gender (mandatory) -->
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required aria-required="true">
+                <option value="" disabled selected>Select your gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+
+            <!-- Address -->
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" rows="4" required aria-required="true"></textarea>
+
+            <!-- Username -->
+            <label for="username">User Name:</label>
+            <input type="text" id="username" name="username" required aria-required="true">
+
+            <!-- Password with instructions -->
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, and one number.">
+            <small style="color: #FFD166;">Please create your username and password. Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, and one number.</small>
+
+            <button type="button" onclick="submitRegistration()" aria-label="Sign up">Sign Up</button>
+        </form>
+        <div class="form-switch">
+            <p>Already have an account? <a id="loginLink" aria-label="Switch to login form">Log In</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Store user data in localStorage (for demonstration purposes)
+        let userData = JSON.parse(localStorage.getItem('userData')) || {};
+
+        // Function to authenticate user and redirect to the homepage
+        function authenticate() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Check if entered credentials match stored data
+            if (userData.username === username && userData.password === password) {
+                // Redirect to homepage (change to actual homepage URL)
+                window.location.href = 'index.html';  // Replace 'homepage.html' with your actual homepage
+            } else {
+                // Display error message if credentials are invalid
+                document.getElementById('loginError').style.display = 'block';
+            }
+        }
+
+        // Function to handle user registration
+        function submitRegistration() {
+            const firstName = document.getElementById('firstName').value;
+            const surname = document.getElementById('surname').value;
+            const gender = document.getElementById('gender').value;
+            const address = document.getElementById('address').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Store the registered user data in localStorage
+            userData = { firstName, surname, gender, address, username, password };
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            alert('Registration Successful');
+            showLoginForm();  // Show login form after successful registration
+        }
+
+        // Toggle between login and signup forms
+        document.getElementById('signupLink').addEventListener('click', showSignupForm);
+        document.getElementById('loginLink').addEventListener('click', showLoginForm);
+
+        function showSignupForm() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('signupForm').style.display = 'block';
+        }
+
+        function showLoginForm() {
+            document.getElementById('signupForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+        }
+
+        // Toggle Dark Mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        // Toggle Colorblind Mode
+        function toggleColorblindMode() {
+            document.body.classList.toggle('colorblind-mode');
+        }
+    </script>
+</body>
+
+</html>

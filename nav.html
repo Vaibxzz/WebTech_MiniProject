@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture Website</title>
+    <style>
+        body {
+            background-color: #2B2D42;
+            color: #EDF2F4;
+            font-family: 'Helvetica', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #3A3D5C;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a {
+            color: #FFD166;
+            text-decoration: none;
+            margin-right: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #E9C46A;
+        }
+        .toggle {
+            display: flex;
+            gap: 10px;
+        }
+        .toggle button {
+            background-color: #8D99AE;
+            color: #EDF2F4;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .toggle button:hover {
+            background-color: #6C757D;
+        }
+
+        /* Dark Mode */
+        .dark-mode {
+            background-color: #1C1C2E;
+            color: #EDF2F4;
+        }
+        .dark-mode nav {
+            background-color: #1C1C3A;
+        }
+        .dark-mode nav a {
+            color: #FFD166;
+        }
+
+        /* Colorblind Mode */
+        .colorblind-mode {
+            background-color: #E5E5E5;
+            color: #202020;
+        }
+        .colorblind-mode nav {
+            background-color: #C5C5C5;
+        }
+        .colorblind-mode nav a {
+            color: #0000FF;
+        }
+
+        /* Responsive Navbar */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav a {
+                margin-bottom: 10px;
+            }
+        }
+
+        /* Page Content Styles */
+        .content {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="links">
+            <a href="index.html">Homepage</a>
+            <a href="about.html">About</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="expertise.html">Expertise</a>
+            <a href="signup.html">Sign in/Sign up</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="book.html">Book an Appointment</a>
+        </div>
+        <div class="toggle">
+            <button onclick="toggleDarkMode()">Dark Mode</button>
+            <button onclick="toggleColorblindMode()">Colorblind Mode</button>
+        </div>
+    </nav>
+
+    <script>
+        // Toggle dark mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        // Toggle colorblind mode
+        function toggleColorblindMode() {
+            document.body.classList.toggle('colorblind-mode');
+        }
+    </script>
+</body>
+</html>
